@@ -1,45 +1,43 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, toggleTodo, deleteTodo } from './store/todoSlice';
-import './App.css';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement, reset, incrementByAmount } from './store/counterSlice';
 
-function App() {
-  const [text, setText] = useState('');
-  const todos = useSelector(state => state.todos);
+const App = () => {
+  const count = useSelector(state => state.counter.count);
   const dispatch = useDispatch();
 
-  const handleAddTodo = () => {
-    if (text.trim()) {
-      dispatch(addTodo(text));
-      setText('');
-    }
+  const handleIncrement = () => {
+    dispatch(increment());
+  };
+
+  const handleDecrement = () => {
+    dispatch(decrement());
+  };
+
+  const handleReset = () => {
+    dispatch(reset());
+  };
+
+  const handleIncrementByAmount = amount => {
+    dispatch(incrementByAmount(amount));
   };
 
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Enter a todo"
-      />
-      <button onClick={handleAddTodo}>Add Todo</button>
-      <ul>
-        {todos.map(todo => (
-          <li key={todo.id}>
-            <span
-              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-              onClick={() => dispatch(toggleTodo(todo.id))}
-            >
-              {todo.text}
-            </span>
-            <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <h1>Counter App</h1>
+      <div>
+        <button onClick={handleIncrement}>Increment</button>
+        <button onClick={handleDecrement}>Decrement</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+      <div>
+        <input type="number" onChange={(e) => handleIncrementByAmount(parseInt(e.target.value))} />
+      </div>
+      <div>
+        <p>Count: {count}</p>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
