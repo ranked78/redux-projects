@@ -10,3 +10,7 @@ Currently, two official plugins are available:
 # Note to myself, before you make a project change your branch first.
 
 - git branch -M [branch-name]
+
+# Dependencies Installed
+
+- npm install @reduxjs/toolkit react-redux
