@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # Note to myself, before you make a project change your branch first.
 
-- git branch -m [branch-name]
+- git branch -M [branch-name]
